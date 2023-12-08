@@ -6,7 +6,7 @@ const GATEKEEPER = config.gatekeeper;
 const PROXY_KEY = config.proxyKey;
 const ADMIN_KEY = config.adminKey;
 
-function getProxyAuthorizationFromRequest(req: Request): string | undefined {
+export function getProxyAuthorizationFromRequest(req: Request): string {
   // Anthropic's API uses x-api-key instead of Authorization.  Some clients will
   // pass the _proxy_ key in this header too, instead of providing it as a
   // Bearer token in the Authorization header.  So we need to check both.
@@ -24,7 +24,7 @@ function getProxyAuthorizationFromRequest(req: Request): string | undefined {
     return token;
   }
 
-  return undefined;
+  return "";
 }
 
 export const gatekeeper: RequestHandler = (req, res, next) => {

@@ -33,6 +33,7 @@ type IndexSheetModel = {
 type LogSheetModel = {
   sheetName: string;
   rows: {
+    user_token: string | undefined;
     model: string;
     endpoint: string;
     promptRaw: string;
@@ -225,7 +226,7 @@ const createLogSheet = async () => {
         {
           range: `${sheetName}!A1:E`,
           values: [
-            ["model", "endpoint", "prompt json", "prompt string", "response"],
+            ["user token", "model", "endpoint", "prompt json", "prompt string", "response"],
           ],
         },
       ],
@@ -254,6 +255,7 @@ export const appendBatch = async (batch: PromptLogEntry[]) => {
   const sheetName = activeLogSheet!.sheetName;
   const newRows = batch.map((entry) => {
     return [
+      entry.user_token,
       entry.model,
       entry.endpoint,
       entry.promptRaw.slice(-50000),
@@ -274,11 +276,12 @@ export const appendBatch = async (batch: PromptLogEntry[]) => {
     log.info({ sheetName, rowCount: newRowCount }, "Successfully appended.");
     activeLogSheet!.rows = activeLogSheet!.rows.concat(
       newRows.map((row) => ({
-        model: row[0],
-        endpoint: row[1],
-        promptRaw: row[2],
-        promptFlattened: row[3],
-        response: row[4],
+        user_token: row[0],
+        model: row[1],
+        endpoint: row[2],
+        promptRaw: row[3],
+        promptFlattened: row[4],
+        response: row[5],
       }))
     );
   } else {
@@ -333,11 +336,12 @@ export const loadLogSheet = async ({
   const values = data.values || [];
   const rows = values.slice(1).map((row) => {
     return {
-      model: row[0],
-      endpoint: row[1],
-      promptRaw: row[2],
-      promptFlattened: row[3],
-      response: row[4],
+      user_token: row[0],
+      model: row[1],
+      endpoint: row[2],
+      promptRaw: row[3],
+      promptFlattened: row[4],
+      response: row[5],
     };
   });
   activeLogSheet = { sheetName, rows };

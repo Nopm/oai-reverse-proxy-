@@ -1,6 +1,7 @@
 import { Request } from "express";
 import { config } from "../../../config";
 import { logQueue } from "../../../shared/prompt-logging";
+import {getProxyAuthorizationFromRequest} from "../../gatekeeper";
 import {
   getCompletionFromBody,
   getModelFromBody,
@@ -33,6 +34,7 @@ export const logPrompt: ProxyResHandlerWithBody = async (
   const promptFlattened = flattenMessages(promptPayload);
   const response = getCompletionFromBody(req, responseBody);
   const model = getModelFromBody(req, responseBody);
+  const user_token = getProxyAuthorizationFromRequest(req);
 
   logQueue.enqueue({
     endpoint: req.inboundApi,
@@ -40,6 +42,7 @@ export const logPrompt: ProxyResHandlerWithBody = async (
     promptFlattened,
     model,
     response,
+    user_token
   });
 };
 

@@ -15,6 +15,7 @@ export interface PromptLogEntry {
   promptFlattened: string;
   response: string;
   // TODO: temperature, top_p, top_k, etc.
+  user_token: string;
 }
 
 export * as logQueue from "./log-queue";
