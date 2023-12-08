@@ -166,7 +166,7 @@ const createLogSheet = async () => {
           addSheet: {
             properties: {
               title: sheetName,
-              gridProperties: { rowCount: MAX_ROWS_PER_SHEET, columnCount: 5 },
+              gridProperties: { rowCount: MAX_ROWS_PER_SHEET, columnCount: 6 },
             },
           },
         },
@@ -224,7 +224,7 @@ const createLogSheet = async () => {
       valueInputOption: "RAW",
       data: [
         {
-          range: `${sheetName}!A1:E`,
+          range: `${sheetName}!A1:F`,
           values: [
             ["user token", "model", "endpoint", "prompt json", "prompt string", "response"],
           ],
@@ -266,7 +266,7 @@ export const appendBatch = async (batch: PromptLogEntry[]) => {
   log.info({ sheetName, rowCount: newRows.length }, "Appending log batch.");
   const data = await client.spreadsheets.values.append({
     spreadsheetId: spreadsheetId,
-    range: `${sheetName}!A1:D`,
+    range: `${sheetName}!A1:E`,
     valueInputOption: "RAW",
     requestBody: { values: newRows, majorDimension: "ROWS" },
   });
