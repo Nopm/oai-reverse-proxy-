@@ -498,9 +498,9 @@ function buildInfoPageHeader(converter: showdown.Converter, title: string) {
 # ${title}`;
   if (config.promptLogging) {
     infoBody += `\n## Prompt Logging Enabled
-This proxy keeps full logs of all prompts and AI responses. Prompt logs are anonymous and do not contain IP addresses or timestamps.
+This proxy keeps full logs of all prompts and AI responses. Prompt logs are NOT anonymous and are directly tied to your user token!
 
-[You can see the type of data logged here, along with the rest of the code.](https://gitgud.io/khanon/oai-reverse-proxy/-/blob/main/src/shared/prompt-logging/index.ts).
+[You can see the type of data logged here, along with the rest of the code.](https://github.com/Nopm/oai-reverse-proxy-/blob/main/src/shared/prompt-logging/index.ts).
 
 **If you are uncomfortable with this, don't send prompts to this proxy!**`;
   }
