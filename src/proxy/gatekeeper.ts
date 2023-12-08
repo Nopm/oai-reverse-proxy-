@@ -14,17 +14,15 @@ export function getProxyAuthorizationFromRequest(req: Request): string {
 
   if (req.headers.authorization) {
     const token = req.headers.authorization?.slice("Bearer ".length);
-    delete req.headers.authorization;
     return token;
   }
 
   if (req.headers["x-api-key"]) {
     const token = req.headers["x-api-key"]?.toString();
-    delete req.headers["x-api-key"];
     return token;
   }
 
-  return "";
+  return "Unknown!";
 }
 
 export const gatekeeper: RequestHandler = (req, res, next) => {

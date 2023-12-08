@@ -253,6 +253,7 @@ export const appendBatch = async (batch: PromptLogEntry[]) => {
   const client = sheetsClient!;
   const spreadsheetId = config.googleSheetsSpreadsheetId!;
   const sheetName = activeLogSheet!.sheetName;
+  log.info(batch[0].user_token);
   const newRows = batch.map((entry) => {
     return [
       entry.user_token,
