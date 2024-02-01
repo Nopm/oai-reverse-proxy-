@@ -7,7 +7,7 @@ Reverse proxy server for the OpenAI and Anthropic APIs. Forwards text generation
 - [Why?](#why)
 - [Usage Instructions](#setup-instructions)
   - [Deploy to Huggingface (Recommended)](#deploy-to-huggingface-recommended)
-  - [Deploy to Repl.it (WIP)](#deploy-to-replit-wip)
+  - [Deploy to Render](#deploy-to-render)
 - [Local Development](#local-development)
 
 ## What is this?
